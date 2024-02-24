@@ -21,6 +21,7 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 
 interface FoodFormProps {
+  foodType: string;
   setFoodType: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -32,7 +33,7 @@ const formSchema = yup
 
 type FormValues = yup.InferType<typeof formSchema>;
 
-const FoodForm = ({ setFoodType }: FoodFormProps) => {
+const FoodForm = ({ foodType, setFoodType }: FoodFormProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formMethods = useForm<FormValues>({
@@ -41,15 +42,17 @@ const FoodForm = ({ setFoodType }: FoodFormProps) => {
   });
 
   const onSubmit = async (data: { food: string }) => {
-    setIsLoading(true);
-    // Simulate a real world scenario where this would most likely fetch data
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setFoodType(data.food);
-    setIsLoading(false);
+    if (data.food !== foodType) {
+      setIsLoading(true);
+      // Simulate a real world scenario where this would most likely fetch data
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setFoodType(data.food);
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full">
+    <section className="flex flex-col items-center justify-between w-full">
       <Form {...formMethods}>
         <form
           onSubmit={formMethods.handleSubmit(onSubmit)}
@@ -96,7 +99,7 @@ const FoodForm = ({ setFoodType }: FoodFormProps) => {
           </Button>
         </form>
       </Form>
-    </div>
+    </section>
   );
 };
 

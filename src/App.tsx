@@ -5,10 +5,10 @@ import ListContainer from "./components/ListContainer/ListContainer";
 function App() {
   const [foodType, setFoodType] = useState<string>("wybierz");
   return (
-    <div className="justify-center flex flex-col items-center gap-y-24 p-24">
-      <FoodForm setFoodType={setFoodType} />
+    <main className="justify-center flex flex-col items-center gap-y-24 p-24 max-w-7xl mx-auto">
+      <FoodForm foodType={foodType} setFoodType={setFoodType} />
       {foodType === "wybierz" ? null : <ListContainer foodType={foodType} />}
-    </div>
+    </main>
   );
 }
 

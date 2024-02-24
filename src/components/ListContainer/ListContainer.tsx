@@ -131,7 +131,7 @@ const ListContainer = ({ foodType }: { foodType: string }) => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-between w-full">
+    <section className="flex flex-col items-center justify-between w-full">
       <Accordion
         defaultValue="item-1"
         type="single"
@@ -200,7 +200,7 @@ const ListContainer = ({ foodType }: { foodType: string }) => {
           </Form>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
